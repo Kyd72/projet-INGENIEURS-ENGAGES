@@ -2,6 +2,11 @@
   <div id="accueil_etudiant">
     <div @click="i" id="texte_accueil">{{nomEtudiant.toUpperCase()}} </div>
   </div>
+
+  <div id="custom1">
+  </div>
+
+
 </template>
 
 <script setup>
@@ -17,6 +22,12 @@ const nomEtudiant=ref("Proposer Une Activité")
 </script>
 
 <style scoped>
+
+
+
+
+
+
 
 div#accueil_etudiant{
   border: black solid 1px;

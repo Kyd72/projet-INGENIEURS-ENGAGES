@@ -37,11 +37,14 @@ Cky72
 
   width:27.27vw;
   height: 3.92vh;
+  margin-right: -8vh;
+  padding :  0 8vh 0 10px ;
 
 
   background: #FFFFFF;
   border-radius: 12px;
-  border: #283593 solid 1px ;
+  border: #283593 solid 0.1vh ;
+  overflow-x: hidden;
 
 
 
@@ -58,13 +61,13 @@ Cky72
 .searchButton {
 
   width: 8.76vw;
-  height: 4.33vh;
+  height: 4.1vh;
   border-radius: 12px;
 
 
   background-color:#283593 ;
   background-size: 3.2vh;
-  background-image: url("src/assets/searchbar/img_loupe.png")  ;
+  background-image: url("@/assets/searchbar/img_loupe.png")  ;
   background-repeat: no-repeat;
   background-position: center;
 

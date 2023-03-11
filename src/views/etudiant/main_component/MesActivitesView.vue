@@ -30,7 +30,7 @@ div#accueil_etudiant{
 div#texte_accueil{
   color: black;
   font-family: 'Poppins',Poppins ,sans-serif;
-  font-size: 4vh;
+  font-size: 3vh;
   width: 24vw;
   margin: 4% auto;
   font-weight: 750;
