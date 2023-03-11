@@ -7,8 +7,8 @@ Cky72
 
 
     <div class="search">
-      <input type="text" class="searchTerm" placeholder="Rechercher une activité par son nom, etc.">
-      <button type="submit" class="searchButton"/>
+      <input type="text" class="searchTerm" placeholder="Rechercher une activité par son nom" v-model="termToFind">
+      <button @click="onClickOnSearchButton" type="submit" class="searchButton"/>
     </div>
 
 
@@ -16,6 +16,18 @@ Cky72
 </template>
 
 <script setup>
+
+const emits=defineEmits(['toSearch'])
+import {ref} from "vue";
+
+const termToFind =ref('')
+
+
+/*Envoyer un event contenant pour message le terme de recherche*/
+
+function onClickOnSearchButton (event){
+  emits('toSearch',termToFind.value.toUpperCase())
+}
 
 </script>
 
@@ -61,7 +73,7 @@ Cky72
 .searchButton {
 
   width: 8.76vw;
-  height: 4.1vh;
+  height: 4.3vh;
   border-radius: 12px;
 
 
@@ -71,7 +83,13 @@ Cky72
   background-repeat: no-repeat;
   background-position: center;
 
+  cursor: pointer;
+
   border: none;
+}
+
+.searchButton:active{
+  background-color: #1f254b;
 }
 
 /*Resize the wrap to see the search bar change!*/

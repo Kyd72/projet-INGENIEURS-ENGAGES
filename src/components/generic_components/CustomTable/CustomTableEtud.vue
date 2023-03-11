@@ -147,11 +147,10 @@ FIN Gestion dynamique de la largeur des span titre et lignes
 .wrapper {
   position: relative;
   width: 1fr;
-  height: 35vh;
-  padding: 5vh 3vw;
+  height: 55vh;
+  padding: 2vh 0;
   color: rgb(0,0,0);
   overflow: auto;
-  margin-left: 20vw;
 
 }
 
