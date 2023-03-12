@@ -35,6 +35,8 @@
                   :activity_name="activityName"
                   :activity_id="activityId"
                   @clickOnClosed="settingShowDescToFalse"></DetailActivite>
+
+
   <div id="cover"> </div>
 
 </template>
@@ -44,7 +46,7 @@
 import {reactive, ref} from "vue";
 import SearchBar from "@/components/generic_components/SearchBar/SearchBar.vue";
 import CustomTableEtud from "@/components/generic_components/CustomTable/CustomTableEtud.vue";
-import DetailActivite from "@/components/etudiant/DetailActivite.vue";
+import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailActivite.vue";
 
 
 
@@ -379,6 +381,8 @@ function backToAllData(event){
 /*Le clic sur le nom d'une acivité affiche la description de celle-ci dans la div prevue à cet effet*/
 //Cela diminue également l'opacité du composant principal
 
+
+//opacity; variable pour rendre inaccessible l'interface lorsque le menu détails est affiché
 let opacity='none'
 
 const showDesc= ref(false)
@@ -396,9 +400,27 @@ const clickOnActivityName = (message) => {
   opacity="block"
 }
 
-
-
 /**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
+
+/**DEBUT IMPLEMENTATION CLIC BOUTON S'INSCRIRE */
+//L'inscription à une activité effectuera une requête http de type POST
+
+let myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+const fetchOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: JSON.stringify("livreSansID"),
+};
+
+
+const urlToRequest ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/1/livres"
+
+
+
+/**FIN IMPLEMENTATION CLIC BOUTON S'INSCRIRE */
+
+
 
 
 

@@ -1,16 +1,16 @@
 <template>
   <div id="boutons_menu_red">
     <div id="s_inscrire_red" class="bouton_menu_red">
-      <img class="image_bouton_red" src="../../assets/sidebar/icone_boutons_sidebar/img_s_inscrire.png" alt="image bouton s'inscrire">
+      <img class="image_bouton_red" src="../../../assets/sidebar/icone_boutons_sidebar/img_s_inscrire.png" alt="image bouton s'inscrire">
     </div>
     <div id="mes_activites_red" class="bouton_menu_red">
-      <img class="image_bouton_red" src="../../assets/sidebar/icone_boutons_sidebar/image_mes_activites.png" alt=" image bouton mes activités">
+      <img class="image_bouton_red" src="../../../assets/sidebar/icone_boutons_sidebar/image_mes_activites.png" alt=" image bouton mes activités">
     </div>
     <div id="proposer_une_activite_red" class="bouton_menu_red">
-      <img class="image_bouton_red" src="../../assets/sidebar/icone_boutons_sidebar/image_proposer_une_activite.png" alt="image proposer une activté">
+      <img class="image_bouton_red" src="../../../assets/sidebar/icone_boutons_sidebar/image_proposer_une_activite.png" alt="image proposer une activté">
     </div>
     <div id="mes_points_red" class="bouton_menu_red">
-      <img class="image_bouton_red" src="../../assets/sidebar/icone_boutons_sidebar/img_mes_points.png" alt="image bouton mes points">
+      <img class="image_bouton_red" src="../../../assets/sidebar/icone_boutons_sidebar/img_mes_points.png" alt="image bouton mes points">
     </div>
 
   </div>

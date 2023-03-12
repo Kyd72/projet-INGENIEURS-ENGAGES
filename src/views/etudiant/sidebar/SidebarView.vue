@@ -28,7 +28,7 @@
 
 <script setup>
 
-import BoutonsMenu from "@/components/etudiant/BoutonsMenu.vue";
+import BoutonsMenu from "@/components/etudiant/SideBar/BoutonsMenu.vue";
 
 
 

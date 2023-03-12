@@ -26,7 +26,7 @@
 
 <script setup>
 
-import BoutonsMenuReduite from "@/components/etudiant/BoutonsMenuReduite.vue";
+import BoutonsMenuReduite from "@/components/etudiant/SideBar/BoutonsMenuReduite.vue";
 </script>
 
 <style scoped>
