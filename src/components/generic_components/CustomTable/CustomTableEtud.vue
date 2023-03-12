@@ -28,7 +28,9 @@
               :data="props.array_for_data_row[index].un.intitule"
               :css_class="props.array_for_data_row[index].un.cssclass"
           />
-          <CustomTableEtudRowLine
+          <CustomTableEtudRowLine @click="(event) => {
+          let messageFromRow2= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData2(messageFromRow2)}"
               v-if="props.array_for_data_row[index].deux!=null"
               :data="props.array_for_data_row[index].deux.intitule"
               :css_class="props.array_for_data_row[index].deux.cssclass"
@@ -86,6 +88,7 @@
 import CustomTableEtudTitleLine from "@/components/generic_components/CustomTable/CustomTableEtudTitleLine.vue";
 import CustomTableEtudRowLine from "@/components/generic_components/CustomTable/CustomTableEtudRowLine.vue";
 
+/**Définition des props*/
 /*array_for_title_row contient des objets json. Chaque objet a pour propriété le nom de la colomne,
  le lien pour l'image et la class CSS
 
@@ -117,20 +120,35 @@ import CustomTableEtudRowLine from "@/components/generic_components/CustomTable/
 
  */
 const props=defineProps(["array_for_title_row", "array_for_data_row"])
+/** Fin Définition des props*/
 
-
+/**DEBUT Gestion dynamique de la largeur des span titre et lignes et taille caractère*/
 /*
-DEBUT Gestion dynamique de la largeur des span titre et lignes
-et taille caractère
 (75/nbre d'éléments)-7
 */
 const titleSpanWidth= (85/(props.array_for_title_row.length))-7+"vw"
 const fontSizeRow=props.array_for_title_row.length>=7?"1.4vh":"1.7vh"
 const fontSizeTitle=props.array_for_title_row.length>=7?"1.4vh":props.array_for_title_row.length<=5?"2vh":"1.8vh"
-/*
-FIN Gestion dynamique de la largeur des span titre et lignes
+/**FIN Gestion dynamique de la largeur des span titre et lignes*/
 
-*/
+
+/**DEBUT Gestion des emits -- */
+const emits=defineEmits(['clickOnRowData1','clickOnRowData2'
+  ,'clickOnRowData3','clickOnRowData4',
+  'clickOnRowData5','clickOnRowData6',
+  'clickOnRowData7'])
+
+/*emit de l'activité cliquée pour affichage de la description*/
+
+function onClickOnRowData2 (message) {
+  emits('clickOnRowData2', message)
+}
+
+
+
+/* fin de l'emit de l'activité cliquée pour affichage de la description*/
+/**FIN Gestion des emits--*/
+
 </script>
 
 <style >
@@ -241,6 +259,7 @@ FIN Gestion dynamique de la largeur des span titre et lignes
   border-radius: 2vh;
   color: #FFFFFF;
   cursor: pointer;
+  height: 4vh;
 }
 
 .row ul li .clickable-text {
@@ -277,7 +296,7 @@ FIN Gestion dynamique de la largeur des span titre et lignes
 
 /*TITLE*/
 .title {
-  position: relative;
+  position: relative ;
 
   height: 10vh;
   width: 100%;

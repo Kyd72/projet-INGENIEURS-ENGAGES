@@ -90,7 +90,7 @@ span.texte_bouton{
   font-family: 'Poppins' , sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 10px;
+  font-size: 1.4vh;
   line-height: 7vh;
   margin-left: 4%;
   overflow: hidden;

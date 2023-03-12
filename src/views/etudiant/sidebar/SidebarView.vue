@@ -119,6 +119,7 @@ div#bouton_deconnexion{
   bottom: 5vh;
   border-radius: 1.5vh;
   padding: 1.5vh 0 0;
+  cursor: pointer;
 }
 
 div#bouton_deconnexion:hover{

@@ -54,7 +54,7 @@ function onClickOnSearchButton (event){
 
 
   background: #FFFFFF;
-  border-radius: 12px;
+  border-radius: 2vh;
   border: #283593 solid 0.1vh ;
   overflow-x: hidden;
 
@@ -74,7 +74,7 @@ function onClickOnSearchButton (event){
 
   width: 8.76vw;
   height: 4.3vh;
-  border-radius: 12px;
+  border-radius: 2vh;
 
 
   background-color:#283593 ;
