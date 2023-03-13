@@ -6,12 +6,13 @@
   <div id="custom1">
   </div>
 
-
+<WritingDescription :showed="true" :activity_name=" 'test' " ></WritingDescription>
 </template>
 
 <script setup>
 
 import {ref} from "vue";
+import WritingDescription from "@/components/etudiant/page_mes_activites/WritingDescription.vue";
 
 const nomEtudiant=ref("Proposer Une Activité")
 

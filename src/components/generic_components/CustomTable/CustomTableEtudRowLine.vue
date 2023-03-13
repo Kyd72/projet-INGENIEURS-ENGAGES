@@ -3,7 +3,7 @@
 
     <span v-if="props.css_class!=='editable-text' " :class="props.css_class">{{props.data}}</span>
 
-    <input v-if="props.css_class==='editable-text' " type="text" name="description" placeholder="Modifier la description" :class="props.css_class">
+    <input v-if="props.css_class==='editable-text' " type="text" name="description" placeholder="Voir description" :class="props.css_class">
 
   </li>
 

@@ -27,10 +27,13 @@
               v-if="props.array_for_data_row[index].un!=null"
               :data="props.array_for_data_row[index].un.intitule"
               :css_class="props.array_for_data_row[index].un.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData1(messageFromRow)}"
           />
           <CustomTableEtudRowLine @click="(event) => {
-          let messageFromRow2= {id: data.id, name :data.deux.intitule}
-          onClickOnRowData2(messageFromRow2)}"
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData2(messageFromRow)}"
               v-if="props.array_for_data_row[index].deux!=null"
               :data="props.array_for_data_row[index].deux.intitule"
               :css_class="props.array_for_data_row[index].deux.cssclass"
@@ -39,26 +42,41 @@
               v-if="props.array_for_data_row[index].trois!=null"
               :data="props.array_for_data_row[index].trois.intitule"
               :css_class="props.array_for_data_row[index].trois.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData3(messageFromRow)}"
           />
           <CustomTableEtudRowLine
               v-if="props.array_for_data_row[index].quatre!=null"
               :data="props.array_for_data_row[index].quatre.intitule"
               :css_class="props.array_for_data_row[index].quatre.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData4(messageFromRow)}"
           />
           <CustomTableEtudRowLine
               v-if="props.array_for_data_row[index].cinq!=null"
               :data="props.array_for_data_row[index].cinq.intitule"
               :css_class="props.array_for_data_row[index].cinq.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData5(messageFromRow)}"
           />
           <CustomTableEtudRowLine
               v-if="props.array_for_data_row[index].six!=null"
               :data="props.array_for_data_row[index].six.intitule"
               :css_class="props.array_for_data_row[index].six.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData6(messageFromRow)}"
           />
           <CustomTableEtudRowLine
               v-if="props.array_for_data_row[index].sept!=null"
               :data="props.array_for_data_row[index].sept.intitule"
               :css_class="props.array_for_data_row[index].sept.cssclass"
+              @click="(event) => {
+          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          onClickOnRowData7(messageFromRow)}"
           />
 <!--          <li><span class="clickable-text">(fadeIn)</span></li>
           <li><span class="non-clickable">(fadeIn)</span></li>
@@ -140,8 +158,32 @@ const emits=defineEmits(['clickOnRowData1','clickOnRowData2'
 
 /*emit de l'activité cliquée pour affichage de la description*/
 
+function onClickOnRowData1 (message) {
+  emits('clickOnRowData1', message)
+}
+
 function onClickOnRowData2 (message) {
   emits('clickOnRowData2', message)
+}
+
+function onClickOnRowData3 (message) {
+  emits('clickOnRowData3', message)
+}
+
+function onClickOnRowData4 (message) {
+  emits('clickOnRowData4', message)
+}
+
+function onClickOnRowData5 (message) {
+  emits('clickOnRowData5', message)
+}
+
+function onClickOnRowData6 (message) {
+  emits('clickOnRowData6', message)
+}
+
+function onClickOnRowData7 (message) {
+  emits('clickOnRowData7', message)
 }
 
 
@@ -223,9 +265,7 @@ function onClickOnRowData2 (message) {
 
 
 .row-fadeIn-wrapper ul li span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+
   height: 3vh;
   width: 100%;
   overflow: hidden;
@@ -255,6 +295,10 @@ function onClickOnRowData2 (message) {
 }
 
 .row ul li .clickable-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
   background-color: #283593; /*bleu ISIS*/
   border-radius: 2vh;
   color: #FFFFFF;
@@ -264,6 +308,7 @@ function onClickOnRowData2 (message) {
 
 .row ul li .clickable-text {
 
+
   text-decoration-line: underline;
   cursor: pointer;
   color: #5480f5;
@@ -272,9 +317,13 @@ function onClickOnRowData2 (message) {
 
 .row ul li .editable-text {
 
+
   overflow: hidden;
   height: 50%;
   width: 90%;
+  font-size: 1.5vh;
+  line-height: 1.5vh;
+  cursor: pointer ;
 
 }
 

@@ -20,6 +20,7 @@
                      :array_for_title_row="titleRowTable1"
                      :array_for_data_row="dataRowTable"
                      @clickOnRowData2="clickOnActivityName"
+                     @clickOnRowData4="clickOnActivityDescription"
     />
 
 
@@ -52,6 +53,19 @@
                   @clickOnClosed="settingShowDescToFalse"></DetailActivite>
 
 
+  <WritingDescription  :showed="showWrit"
+                       :activity_name="activityNameForWriting"
+                       :activity_id="activityIdForWriting"
+                       @clickOnClosed="settingShowWritToFalse"
+                       @clickOnSaved="settingShowWritToFalse"
+
+
+  >
+<!-- TODO : click on delete, reload all datas   -->
+
+  </WritingDescription>
+
+
   <div id="cover"> </div>
 
 </template>
@@ -61,6 +75,7 @@
 import {reactive, ref} from "vue";
 import CustomTableEtud from "@/components/generic_components/CustomTable/CustomTableEtud.vue";
 import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailActivite.vue";
+import WritingDescription from "@/components/etudiant/page_mes_activites/WritingDescription.vue";
 
 
 
@@ -84,176 +99,121 @@ let data1 =
       un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
       deux :   {intitule : "ORGANISER CONFERENCE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}
+      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}
     }
 let data2 =
     {
       id : 2,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
+      un :     {intitule : "CLIMAT", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "PLANTER DES ARBRES", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}               //pour colomne
 
 
 
     }
-
 let data3 =
     {
       id : 3,                                                                    // pour gestion des emits
       un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
+      deux :   {intitule : "TRAVAILLER A HORUS", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}                //pour colomne
 
 
 
     }
-
 let data4 =
     {
       id : 4,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
+      un :     {intitule : "DIVERSITE", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "PARTICIPER AUX CORDEES DE LA REUSSITE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}                //pour colomne
 
 
 
     }
-
 let data5 =
     {
       id : 5,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
+      un :     {intitule : "HUMANITAIRE", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "ACCUEILLIR DIRECTEUR RWANDA", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}               //pour colomne
 
 
 
     }
-
 let data6 =
     {
       id : 6,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "DIVERSITE", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
+      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                //pour colomne
 
 
 
     }
-
 let data7 =
     {
       id : 7,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "ASSOCIATIF", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
+      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
 
 
 
     }
-
 let data8 =
     {
       id : 8,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
+      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "ASSOCIATIF", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "PARTICIPER CONFERENCE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
       quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                //pour colomne
 
 
 
     }
-
 let data9 =
     {
       id : 9,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "CLIMAT", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "FRESQUES DU CLIMAT", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
+      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
 
 
 
     }
-
 let data10 =
     {
       id : 10,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "DIVERSITE", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "CORDEES", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
+      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
+      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
 
 
 
     }
 
-let data11 =
-    {
-      id : 11,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
 
-
-
-    }
-
-let data12 ={
-  id : 12,                                                                    // pour gestion des emits
-  un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-  deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-  trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-  quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-  cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-}
-
-let data13 ={
-  id : 13,                                                                    // pour gestion des emits
-  un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-  deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-  trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-  quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-  cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-}
-
-let data14 ={
-  id : 14,                                                                    // pour gestion des emits
-  un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-  deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-  trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-  quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-  cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-}
-const dataRowTableSimul=  [data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13,data14]
-
+const dataRowTableSimul1=  [data1,data2,data3,data4,data5]
+const dataRowTableSimul2=  [data6,data7,data8,data9,data10]
 
 /**FIN Simulation données pour tableau*/
 
@@ -301,7 +261,7 @@ let titleRowTable1= [colomneReferentielTable1,colomneActiviteTable1,colomneDateL
 const dataRowTable = reactive([])
 
 
-dataRowTableSimul.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+dataRowTableSimul1.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
 
 
 
@@ -351,7 +311,7 @@ let titleRowTable2= [colomneSemestre,colomneActiviteTable2,colomneReferentielTab
 const dataRowTable2 = reactive([])
 
 
-dataRowTableSimul.forEach(element=>dataRowTable2.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+dataRowTableSimul2.forEach(element=>dataRowTable2.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
 
 
 
@@ -446,43 +406,15 @@ const clickOnTitleTableActivitesTerminees = (event) =>{
 /**FIN implémentaion affichage dynamique tableau*/
 
 
-/**DEBUT Implémentation EVENT search bar*/
-/*
 
-Le clic sur le bouton recherche de la search bar entraîne l'envoi d'un event vers le composant père.
-Cet event contient comme message le terme de recherche
-
-Le composant père recherche ce terme de recherche dans la liste obtenue par requête ajax et actualise la liste en props
-
-Le clic sur le boutton AFFICHER TOUT recharge toutes les activités disponibles
-
-*/
-
-const showNumberSearchResult= ref(false)
-function eventSearchBar(message){
-  dataRowTable.splice(0)
-  dataRowTableSimul.forEach(                                                              //à effectuer sur donnees Ajax
-      (element) =>{element.deux.intitule.includes(message)?dataRowTable.push(element): ()=>{} })
-  showNumberSearchResult.value=true
-
-}
-
-function backToAllData(event){
-
-  dataRowTableSimul.forEach(element=>dataRowTable.push(element))//à effectuer sur donnees Ajax
-  showNumberSearchResult.value=false
-
-}
-
-/**FIN IMPLEMENTATION  EVENT search bar*/
-
+let opacity='none' //variable utilisée dans les deux prochaines sections
 /**DEBUT IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
 /*Le clic sur le nom d'une acivité affiche la description de celle-ci dans la div prevue à cet effet*/
 //Cela diminue également l'opacité du composant principal
 
 
 //opacity; variable pour rendre inaccessible l'interface lorsque le menu détails est affiché
-let opacity='none'
+
 
 const showDesc= ref(false)
 const settingShowDescToFalse = (event) => {
@@ -501,23 +433,26 @@ const clickOnActivityName = (message) => {
 
 /**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
 
-/**DEBUT IMPLEMENTATION CLIC BOUTON S'INSCRIRE */
-//L'inscription à une activité effectuera une requête http de type POST
+/**DEBUT IMPLEMENETATION AFFICHAGE ET MODIFICATION DESCRIPTION*/
 
-let myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-const fetchOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: JSON.stringify("livreSansID"),
-};
+const showWrit= ref(false)
+const settingShowWritToFalse = (event) => {
+  showWrit.value=false
+  opacity="none"
+}
+const activityNameForWriting =ref('')
+const activityIdForWriting =ref('')
+
+const clickOnActivityDescription = (message) => {
+  activityIdForWriting.value=message.id
+  activityNameForWriting.value=message.name
+  showWrit.value=true;
+  opacity="block"
+}
 
 
-const urlToRequest ="https://webmmi.iut-tlse3.fr/~pecatte/librairies/public/1/livres"
 
-
-
-/**FIN IMPLEMENTATION CLIC BOUTON S'INSCRIRE */
+/**FIN IMPLEMENETATION AFFICHAGE ET MODIFICATION DESCRIPTION*/
 
 
 
