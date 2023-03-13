@@ -257,10 +257,10 @@ let colomneActivite=
       intitule :"ACTIVITE"
     }
 
-let colomneDateLimite=
+let colomneDateLimiteInscription=
     { imgsrc : "src/assets/SinscrireActivite/TableauActivteOuverte/img_date_limite.png",
       cssclass :"non-clickable",
-      intitule :"DATE LIMITE"
+      intitule :"DATE LIMITE D'INSCRIPTION"
     }
 
 let colomnePlacesRestantes=
@@ -276,7 +276,7 @@ let colomneSinscrire=
     }
 
 
-let titleRowTable= [colomneReferentiel,colomneActivite,colomneDateLimite,colomnePlacesRestantes, colomneSinscrire]
+let titleRowTable= [colomneReferentiel,colomneActivite,colomneDateLimiteInscription,colomnePlacesRestantes, colomneSinscrire]
 
 
 /*Récupération données par requête AJAX */

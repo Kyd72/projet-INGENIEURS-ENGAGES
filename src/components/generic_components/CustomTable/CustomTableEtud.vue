@@ -165,7 +165,7 @@ function onClickOnRowData2 (message) {
 .wrapper {
   position: relative;
   width: 1fr;
-  height: 55vh;
+  height: 45vh;
   padding: 2vh 0;
   color: rgb(0,0,0);
   overflow: auto;
@@ -270,6 +270,14 @@ function onClickOnRowData2 (message) {
 
 }
 
+.row ul li .editable-text {
+
+  overflow: hidden;
+  height: 50%;
+  width: 90%;
+
+}
+
 
 .fadeIn {
   padding: 2.8vh 0;
@@ -308,15 +316,19 @@ function onClickOnRowData2 (message) {
 
 .title ul {
   height: 100%;
-  display: flex;
+  display: inline-flex;
   overflow: hidden;
+  margin: auto 3%;
+
 
 }
 
 .title ul li {
 
-  display: flex;
-margin: auto;
+  display: inline-flex;
+  margin: auto;
+  align-items: center; /*alignement vertical*/
+  justify-content: center;/*alignement horizontal*/
 
 
 
@@ -324,8 +336,7 @@ margin: auto;
 
 .title ul li span {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /*alignement vertical*/
   height: 4vh;
   width: v-bind(titleSpanWidth);
   overflow: hidden;
