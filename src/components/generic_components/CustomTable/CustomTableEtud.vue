@@ -306,6 +306,19 @@ function onClickOnRowData7 (message) {
   height: 4vh;
 }
 
+.row ul li .not-clickable-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  background-color: #1b1f41; /*bleu ISIS*/
+  border-radius: 2vh;
+  color: #FFFFFF;
+  cursor: default;
+  height: 4vh;
+
+}
+
 .row ul li .clickable-text {
 
 
@@ -325,6 +338,18 @@ function onClickOnRowData7 (message) {
   line-height: 1.5vh;
   cursor: pointer ;
 
+}
+
+.row ul li .clickable-button:active {
+  background-color: #131850; /*bleu ISIS*/
+
+}
+
+
+.row ul li .clickable-text:active {
+  text-decoration-line: underline;
+  color: #d54a4a;
+  cursor: pointer;
 }
 
 
@@ -405,9 +430,20 @@ function onClickOnRowData7 (message) {
   cursor: pointer;
 }
 
+.title ul li .clickable-button:active {
+  background-color: #131850; /*bleu ISIS*/
+
+}
+
 .title ul li .clickable-text {
   text-decoration-line: underline;
   color: #5480f5;
+  cursor: pointer;
+}
+
+.title ul li .clickable-text:active {
+  text-decoration-line: underline;
+  color: #d54a4a;
   cursor: pointer;
 }
 

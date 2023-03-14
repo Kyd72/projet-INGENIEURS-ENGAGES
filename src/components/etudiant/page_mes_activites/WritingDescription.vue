@@ -3,19 +3,19 @@
   <div v-if="props.showed" id="writing-description">
     <div id="container-titre-activite-with-button-close">
       <span id="titre-activite-in-writingDescription">{{ props.activity_name }}</span>
-      <button id="button-delete-in-writingDescription" class="button-in-WritingDescription" @click="clickOnDelete">
+      <button title="Supprimer cette activité" id="button-delete-in-writingDescription" class="button-in-WritingDescription" @click="clickOnDelete">
         <img
           src="src/assets/mes_activites/zone_texte_description/img_delete.png" alt=""></button>
-      <button id="button-close-in-writingDescription" class="button-in-WritingDescription" @click="clickOnClose"><img
+      <button title="Fermer" id="button-close-in-writingDescription" class="button-in-WritingDescription" @click="clickOnClose"><img
           src="src/assets/mes_activites/zone_texte_description/img_close.png" alt=""></button>
     </div>
     <div id="container-writing-description-with-referent-name-and-bonus">
       <div id="description-activite-in-writingDescription"><textarea name="written_description" id="description-in-writing-description"
            placeholder="Décrivez les actions menées dans le cadre de cette activité"></textarea></div>
 
-      <button id="button-save-in-writing-description" class="button-in-WritingDescription" @click="clickOnSave">
+      <button id="button-save-in-writing-description" class="button-in-WritingDescription" @click="clickOnSave" title="Sauvegarder">
         <div>
-          <span>SAUVEGARDER</span>
+          <span >SAUVEGARDER</span>
           <img
               src="src/assets/mes_activites/zone_texte_description/img_save.png" alt="">
         </div>

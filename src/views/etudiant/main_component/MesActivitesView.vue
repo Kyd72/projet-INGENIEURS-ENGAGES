@@ -17,8 +17,8 @@
 
 
     <CustomTableEtud v-if="showTableActivitesEnCours"
-                     :array_for_title_row="titleRowTable1"
-                     :array_for_data_row="dataRowTable"
+                     :array_for_title_row="titleRowTableActiviteEnCours"
+                     :array_for_data_row="dataRowTableTableActiviteEnCours"
                      @clickOnRowData2="clickOnActivityName"
                      @clickOnRowData4="clickOnActivityDescription"
     />
@@ -39,8 +39,8 @@
 
 
     <CustomTableEtud v-if="showTableActivitesTerminees"
-                     :array_for_title_row="titleRowTable2"
-                     :array_for_data_row="dataRowTable2"
+                     :array_for_title_row="titleRowTableActiviteesTerminees"
+                     :array_for_data_row="dataRowTableActiviteesTerminees"
                      @clickOnRowData2="clickOnActivityName"
     />
 
@@ -58,6 +58,7 @@
                        :activity_id="activityIdForWriting"
                        @clickOnClosed="settingShowWritToFalse"
                        @clickOnSaved="settingShowWritToFalse"
+                       @clickOnDeleted="settingShowWritToFalseWithDelete"
 
 
   >
@@ -121,7 +122,7 @@ let data3 =
       deux :   {intitule : "TRAVAILLER A HORUS", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
       trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
       quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}                //pour colomne
+      cinq :   {intitule : "SOUMIS", cssclass : "not-clickable-button"}                //pour colomne
 
 
 
@@ -219,38 +220,38 @@ const dataRowTableSimul2=  [data6,data7,data8,data9,data10]
 
 /**DEBUT IMPLEMENTATION POUR REMPLISSAGE TABLEAU ********************************************************************************/
 //Données à afficher dans le tableau Activités en cours
-let colomneReferentielTable1=
+let colomneReferentielTableActiviteEnCours=
     { imgsrc : "src/assets/mes_activites/tableau_activites_en_cours/colonne_tableau/img_referentiel.png",
       cssclass :"non-clickable",
       intitule :"REFERENTIEL"
     }
 
-let colomneActiviteTable1=
+let colomneActiviteTableActiviteEnCours=
     { imgsrc : "src/assets/mes_activites/tableau_activites_en_cours/colonne_tableau/img_activite.png",
       cssclass :"non-clickable",
       intitule :"ACTIVITE"
     }
 
-let colomneDateLimite=
+let colomneDateLimiteTableActiviteEnCours=
     { imgsrc : "src/assets/mes_activites/tableau_activites_en_cours/colonne_tableau/img_date_limite.png",
       cssclass :"non-clickable",
       intitule :"DATE LIMITE"
     }
 
-let colomneModifDesc=
+let colomneModifDescTableActiviteEnCours=
     { imgsrc : "src/assets/mes_activites/tableau_activites_en_cours/colonne_tableau/img_modif_description.png",
       cssclass :"non-clickable",
       intitule :"AFFICH/MODIF DESCRIPTION"
     }
 
-let colomneStatut=
+let colomneStatutTableActiviteEnCours=
     { imgsrc : "src/assets/mes_activites/tableau_activites_en_cours/colonne_tableau/img_statut.png",
       cssclass :"non-clickable",
       intitule :"STATUT"
     }
 
 
-let titleRowTable1= [colomneReferentielTable1,colomneActiviteTable1,colomneDateLimite,colomneModifDesc, colomneStatut]
+let titleRowTableActiviteEnCours= [colomneReferentielTableActiviteEnCours,colomneActiviteTableActiviteEnCours,colomneDateLimiteTableActiviteEnCours,colomneModifDescTableActiviteEnCours, colomneStatutTableActiviteEnCours]
 
 
 /*Récupération données par requête AJAX */
@@ -258,49 +259,49 @@ let titleRowTable1= [colomneReferentielTable1,colomneActiviteTable1,colomneDateL
 /* Fin Récupération données par requête AJAX */
 
 /*Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-const dataRowTable = reactive([])
+const dataRowTableTableActiviteEnCours = reactive([])
 
 
-dataRowTableSimul1.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+dataRowTableSimul1.forEach(element=>dataRowTableTableActiviteEnCours.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
 
 
 
 /*Fin Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
 
-//Données à afficher dans tableau 2
+//Données à afficher dans tableau 2 Activitées terminées
 
-let colomneReferentielTable2=
+let colomneReferentielTableActiviteesTerminees=
     { imgsrc : "src/assets/mes_activites/tableau_activites_terminees/colonne_tableau/img_referentiel.png",
       cssclass :"non-clickable",
       intitule :"REFERENTIEL"
     }
 
-let colomneActiviteTable2=
+let colomneActiviteTableActiviteesTerminees=
     { imgsrc : "src/assets/mes_activites/tableau_activites_terminees/colonne_tableau/img_activite.png",
       cssclass :"non-clickable",
       intitule :"ACTIVITE"
     }
 
-let colomneSemestre=
+let colomneSemestreActiviteesTerminees=
     { imgsrc : "src/assets/mes_activites/tableau_activites_terminees/colonne_tableau/img_semestre.png",
       cssclass :"non-clickable",
-      intitule :"DATE LIMITE"
+      intitule :"SEMESTRE"
     }
 
-let colomneDescription=
+let colomneDescriptionActiviteesTerminees=
     { imgsrc : "src/assets/mes_activites/tableau_activites_terminees/colonne_tableau/img_description.png",
       cssclass :"non-clickable",
       intitule :"DESCRIPTION"
     }
 
-let colomnePointsAttribues=
+let colomnePointsAttribuesActiviteesTerminees=
     { imgsrc : "src/assets/mes_activites/tableau_activites_terminees/colonne_tableau/img_points_attribues.png",
       cssclass :"non-clickable",
       intitule :"POINTS"
     }
 
 
-let titleRowTable2= [colomneSemestre,colomneActiviteTable2,colomneReferentielTable2,colomneDescription, colomnePointsAttribues]
+let titleRowTableActiviteesTerminees= [colomneSemestreActiviteesTerminees,colomneReferentielTableActiviteesTerminees, colomneActiviteTableActiviteesTerminees, colomneDescriptionActiviteesTerminees, colomnePointsAttribuesActiviteesTerminees]
 
 
 /*Récupération données par requête AJAX */
@@ -308,10 +309,10 @@ let titleRowTable2= [colomneSemestre,colomneActiviteTable2,colomneReferentielTab
 /* Fin Récupération données par requête AJAX */
 
 /*Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-const dataRowTable2 = reactive([])
+const dataRowTableActiviteesTerminees = reactive([])
 
 
-dataRowTableSimul2.forEach(element=>dataRowTable2.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+dataRowTableSimul2.forEach(element=>dataRowTableActiviteesTerminees.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
 
 
 
@@ -433,10 +434,18 @@ const clickOnActivityName = (message) => {
 
 /**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
 
-/**DEBUT IMPLEMENETATION AFFICHAGE ET MODIFICATION DESCRIPTION*/
+/**DEBUT IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE*/
 
 const showWrit= ref(false)
 const settingShowWritToFalse = (event) => {
+  showWrit.value=false
+  opacity="none"
+}
+
+
+const settingShowWritToFalseWithDelete = (event) => {
+
+  /*TODO : ajax request to reload all datas (line 262 -265)*/
   showWrit.value=false
   opacity="none"
 }
@@ -452,7 +461,7 @@ const clickOnActivityDescription = (message) => {
 
 
 
-/**FIN IMPLEMENETATION AFFICHAGE ET MODIFICATION DESCRIPTION*/
+/**FIN IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE*/
 
 
 
