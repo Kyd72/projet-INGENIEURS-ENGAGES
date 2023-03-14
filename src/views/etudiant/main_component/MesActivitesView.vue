@@ -19,8 +19,8 @@
     <CustomTableEtud v-if="showTableActivitesEnCours"
                      :array_for_title_row="titleRowTableActiviteEnCours"
                      :array_for_data_row="dataRowTableTableActiviteEnCours"
-                     @clickOnRowData2="clickOnActivityName"
-                     @clickOnRowData4="clickOnActivityDescription"
+                     @clickOnRowData2="clickOnActivityNameInTableActiviteEnCours"
+                     @clickOnRowData4="clickOnActivityDescriptionOnTableActiviteEnCours"
     />
 
 
@@ -41,30 +41,50 @@
     <CustomTableEtud v-if="showTableActivitesTerminees"
                      :array_for_title_row="titleRowTableActiviteesTerminees"
                      :array_for_data_row="dataRowTableActiviteesTerminees"
-                     @clickOnRowData2="clickOnActivityName"
+                     @clickOnRowData3="clickOnActivityNameInTableActiviteTerminees"
+                     @clickOnRowData4="clickOnActivityDescriptionOnTableActiviteTerminees"
     />
 
 
   </div>
 
-  <DetailActivite :showed="showDesc"
-                  :activity_name="activityName"
-                  :activity_id="activityId"
-                  @clickOnClosed="settingShowDescToFalse"></DetailActivite>
+  <DetailActivite :showed="showDescForTableActiviteEnCours"
+                  :activity_name="activityNameInTableActiviteEnCours"
+                  :activity_id="activityIdInTableActiviteEnCours"
+                  @clickOnClosed="settingShowDescForTableActiviteEnCoursToFalse"></DetailActivite>
+
+  <DetailActivite :showed="showDescForTableActiviteTerminees"
+                  :activity_name="activityNameInTableActiviteTerminees"
+                  :activity_id="activityIdInTableActiviteTerminees"
+                  @clickOnClosed="settingShowDescForTableActiviteTermineesToFalse"></DetailActivite>
 
 
-  <WritingDescription  :showed="showWrit"
-                       :activity_name="activityNameForWriting"
-                       :activity_id="activityIdForWriting"
-                       @clickOnClosed="settingShowWritToFalse"
-                       @clickOnSaved="settingShowWritToFalse"
-                       @clickOnDeleted="settingShowWritToFalseWithDelete"
+  <WritingDescription  :showed="showWritForTableActiviteEnCours"
+                       :activity_name="activityNameForWritingForTableActiviteEnCours"
+                       :activity_id="activityIdForWritingForTableActiviteEnCours"
+                       @clickOnClosed="settingShowWritToFalseForTableActiviteEnCours"
+                       @clickOnSaved="settingShowWritToFalseForTableActiviteEnCours"
+                       @clickOnDeleted="settingShowWritToFalseWithDeleteForTableActiviteEnCours"
 
 
   >
 <!-- TODO : click on delete, reload all datas   -->
 
   </WritingDescription>
+
+  <ReadingDescription  :showed="showWritForTableActiviteTerminees"
+                       :activity_id="activityIdForWritingForTableActiviteTerminees"
+                       @clickOnClosed="settingShowWritToFalseForTableActiviteTerminees"
+                       @clickOnSaved="settingShowWritToFalseForTableActiviteTerminees"
+                       @clickOnDeleted="settingShowWritToFalseWithDeleteForTableActiviteTerminees"
+
+
+  >
+    <!-- TODO : click on delete, reload all datas   -->
+
+  </ReadingDescription>
+
+
 
 
   <div id="cover"> </div>
@@ -77,6 +97,7 @@ import {reactive, ref} from "vue";
 import CustomTableEtud from "@/components/generic_components/CustomTable/CustomTableEtud.vue";
 import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailActivite.vue";
 import WritingDescription from "@/components/etudiant/page_mes_activites/WritingDescription.vue";
+import ReadingDescription from "@/components/etudiant/page_mes_activites/ReadingDescription.vue";
 
 
 
@@ -345,7 +366,7 @@ const arrowsImageLinks= [
 let arrowToShowForTable1 =0
 const showTableActivitesEnCours = ref(true)
 
-const adaptSize0ForTable1 = () => {
+const adaptSize0ForTableActiviteEnCours = () => {
   title_img_width_for_table_1
       .value="1.69vw";
   title_img_height_for_table_1
@@ -354,7 +375,7 @@ const adaptSize0ForTable1 = () => {
 
 }
 
-const adaptSize1ForTable1 = () => {
+const adaptSize1ForTableActiviteEnCours = () => {
   title_img_width_for_table_1
       .value="2.24vh";
   title_img_height_for_table_1
@@ -365,7 +386,7 @@ const adaptSize1ForTable1 = () => {
 
 const clickOnTitleTableActivitesEnCours = (event)=> {
   showTableActivitesEnCours.value=!showTableActivitesEnCours.value
-  showTableActivitesEnCours.value===true? adaptSize0ForTable1() :adaptSize1ForTable1()
+  showTableActivitesEnCours.value===true? adaptSize0ForTableActiviteEnCours() :adaptSize1ForTableActiviteEnCours()
 
 }
 
@@ -380,7 +401,7 @@ const title_img_height_for_table_2
 let arrowToShowForTable2 =0
 const showTableActivitesTerminees = ref(true)
 
-const adaptSize0ForTable2 = () => {
+const adaptSize0ForTableActiviteesTerminees = () => {
   title_img_width_for_table_2
       .value="1.69vw";
   title_img_height_for_table_2
@@ -389,7 +410,7 @@ const adaptSize0ForTable2 = () => {
 
 }
 
-const adaptSize1ForTable2 = () => {
+const adaptSize1ForTableActiviteesTerminees = () => {
   title_img_width_for_table_2
       .value="2.24vh";
   title_img_height_for_table_2
@@ -400,7 +421,7 @@ const adaptSize1ForTable2 = () => {
 
 const clickOnTitleTableActivitesTerminees = (event) =>{
   showTableActivitesTerminees.value=!showTableActivitesTerminees.value
-  showTableActivitesTerminees.value===true? adaptSize0ForTable2() :adaptSize1ForTable2()
+  showTableActivitesTerminees.value===true? adaptSize0ForTableActiviteesTerminees() :adaptSize1ForTableActiviteesTerminees()
 
 }
 
@@ -409,7 +430,7 @@ const clickOnTitleTableActivitesTerminees = (event) =>{
 
 
 let opacity='none' //variable utilisée dans les deux prochaines sections
-/**DEBUT IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
+/**DEBUT IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE  POUR TABLEAU 1 ACTIVITE  EN COURS*/
 /*Le clic sur le nom d'une acivité affiche la description de celle-ci dans la div prevue à cet effet*/
 //Cela diminue également l'opacité du composant principal
 
@@ -417,51 +438,113 @@ let opacity='none' //variable utilisée dans les deux prochaines sections
 //opacity; variable pour rendre inaccessible l'interface lorsque le menu détails est affiché
 
 
-const showDesc= ref(false)
-const settingShowDescToFalse = (event) => {
-  showDesc.value=false
+const showDescForTableActiviteEnCours= ref(false)
+const settingShowDescForTableActiviteEnCoursToFalse = (event) => {
+  showDescForTableActiviteEnCours.value=false
   opacity="none"
 }
-const activityName =ref('')
-const activityId =ref('')
+const activityNameInTableActiviteEnCours =ref('')
+const activityIdInTableActiviteEnCours =ref('')
 
-const clickOnActivityName = (message) => {
-  activityId.value=message.id
-  activityName.value=message.name
-  showDesc.value=true;
+const clickOnActivityNameInTableActiviteEnCours = (message) => {
+  activityIdInTableActiviteEnCours.value=message.id
+  activityNameInTableActiviteEnCours.value=message.name
+  showDescForTableActiviteEnCours.value=true;
   opacity="block"
 }
 
-/**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE*/
+/**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE POUR TABLEAU 1 ACTIVITE  EN COURS*/
 
-/**DEBUT IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE*/
+/**DEBUT IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE POUR TABLEAU 1 ACTIVITE  EN COURS*/
 
-const showWrit= ref(false)
-const settingShowWritToFalse = (event) => {
-  showWrit.value=false
+const showWritForTableActiviteEnCours= ref(false)
+const settingShowWritToFalseForTableActiviteEnCours = (event) => {
+  showWritForTableActiviteEnCours.value=false
   opacity="none"
 }
 
 
-const settingShowWritToFalseWithDelete = (event) => {
+const settingShowWritToFalseWithDeleteForTableActiviteEnCours = (event) => {
 
   /*TODO : ajax request to reload all datas (line 262 -265)*/
-  showWrit.value=false
+  showWritForTableActiviteEnCours.value=false
   opacity="none"
 }
-const activityNameForWriting =ref('')
-const activityIdForWriting =ref('')
+const activityNameForWritingForTableActiviteEnCours =ref('')
+const activityIdForWritingForTableActiviteEnCours =ref('')
 
-const clickOnActivityDescription = (message) => {
-  activityIdForWriting.value=message.id
-  activityNameForWriting.value=message.name
-  showWrit.value=true;
+const clickOnActivityDescriptionOnTableActiviteEnCours = (message) => {
+  activityIdForWritingForTableActiviteEnCours.value=message.id
+  activityNameForWritingForTableActiviteEnCours.value=message.name
+  showWritForTableActiviteEnCours.value=true;
   opacity="block"
+
 }
 
 
 
 /**FIN IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE*/
+
+
+
+//*********************************************************************************
+//**************************************************************************
+//********************************************************************************
+
+/**DEBUT IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE  POUR TABLEAU 2 ACTIVITE  TERMINEES*/
+/*Le clic sur le nom d'une acivité affiche la description de celle-ci dans la div prevue à cet effet*/
+//Cela diminue également l'opacité du composant principal
+
+
+//opacity; variable pour rendre inaccessible l'interface lorsque le menu détails est affiché
+
+
+const showDescForTableActiviteTerminees= ref(false)
+const settingShowDescForTableActiviteTermineesToFalse = (event) => {
+  showDescForTableActiviteTerminees.value=false
+  opacity="none"
+}
+const activityNameInTableActiviteTerminees =ref('')
+const activityIdInTableActiviteTerminees =ref('')
+
+const clickOnActivityNameInTableActiviteTerminees = (message) => {
+  activityIdInTableActiviteTerminees.value=message.id
+  activityNameInTableActiviteTerminees.value=message.name
+  showDescForTableActiviteTerminees.value=true;
+  opacity="block"
+}
+
+/**FIN IMPLEMENTATION AFFICHAGE DESCRIPTION ET DETAILS D'UNE ACTIVITE POUR TABLEAU 2 ACTIVITE  TERMINEES*/
+
+/**DEBUT IMPLEMENTATION AFFICHAGE  DESCRIPTION DE TRAVAIL EFFECTUE POUR TABLEAU 2 ACTIVITE  TERMINEES*/
+
+const showWritForTableActiviteTerminees= ref(false)
+const settingShowWritToFalseForTableActiviteTerminees = (event) => {
+  showWritForTableActiviteTerminees.value=false
+  opacity="none"
+}
+
+
+const settingShowWritToFalseWithDeleteForTableActiviteTerminees = (event)=>{
+
+  /*TODO : ajax request to reload all datas (line 262 -265)*/
+  showWritForTableActiviteTerminees.value=false
+  opacity="none"
+}
+const activityNameForWritingForTableActiviteTerminees =ref('')
+const activityIdForWritingForTableActiviteTerminees =ref('')
+
+const clickOnActivityDescriptionOnTableActiviteTerminees = (message) => {
+  activityIdForWritingForTableActiviteTerminees.value=message.id
+  activityNameForWritingForTableActiviteTerminees.value=message.name
+  showWritForTableActiviteTerminees.value=true;
+  opacity="block"
+
+}
+
+
+
+/**FIN IMPLEMENTATION AFFICHAGE ET MODIFICATION DESCRIPTION DE TRAVAIL EFFECTUE TABLEAU 2 ACTIVITE  TERMINEES*/
 
 
 
@@ -563,7 +646,7 @@ h1#mes_activites-intitule-titre-2{
   position: absolute;
   top: 0;
   left: 19vw;
-  height: 125vh ;
+  height: 150vh ;
   width: 100%;
   opacity: 0.80;
   background: #aaa;

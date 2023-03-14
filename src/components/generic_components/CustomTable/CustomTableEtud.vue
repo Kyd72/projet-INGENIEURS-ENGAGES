@@ -28,7 +28,7 @@
               :data="props.array_for_data_row[index].un.intitule"
               :css_class="props.array_for_data_row[index].un.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.un.intitule}
           onClickOnRowData1(messageFromRow)}"
           />
           <CustomTableEtudRowLine @click="(event) => {
@@ -43,7 +43,7 @@
               :data="props.array_for_data_row[index].trois.intitule"
               :css_class="props.array_for_data_row[index].trois.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.trois.intitule}
           onClickOnRowData3(messageFromRow)}"
           />
           <CustomTableEtudRowLine
@@ -51,7 +51,7 @@
               :data="props.array_for_data_row[index].quatre.intitule"
               :css_class="props.array_for_data_row[index].quatre.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.quatre.intitule}
           onClickOnRowData4(messageFromRow)}"
           />
           <CustomTableEtudRowLine
@@ -59,7 +59,7 @@
               :data="props.array_for_data_row[index].cinq.intitule"
               :css_class="props.array_for_data_row[index].cinq.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.cinq.intitule}
           onClickOnRowData5(messageFromRow)}"
           />
           <CustomTableEtudRowLine
@@ -67,7 +67,7 @@
               :data="props.array_for_data_row[index].six.intitule"
               :css_class="props.array_for_data_row[index].six.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.six.intitule}
           onClickOnRowData6(messageFromRow)}"
           />
           <CustomTableEtudRowLine
@@ -75,7 +75,7 @@
               :data="props.array_for_data_row[index].sept.intitule"
               :css_class="props.array_for_data_row[index].sept.cssclass"
               @click="(event) => {
-          let messageFromRow= {id: data.id, name :data.deux.intitule}
+          let messageFromRow= {id: data.id, name :data.sept.intitule}
           onClickOnRowData7(messageFromRow)}"
           />
 <!--          <li><span class="clickable-text">(fadeIn)</span></li>
