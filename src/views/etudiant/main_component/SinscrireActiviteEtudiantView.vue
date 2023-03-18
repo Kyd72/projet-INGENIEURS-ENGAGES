@@ -43,12 +43,37 @@
 
 <script setup>
 
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import SearchBar from "@/components/generic_components/SearchBar/SearchBar.vue";
 import CustomTableEtud from "@/components/generic_components/CustomTable/CustomTableEtud.vue";
 import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailActivite.vue";
 
+/**Gestion des endpoints pour requête AJAX*/
+//Note : les requêtes AJAX ne seront pas centralisées dans un seul fichier js.
+//Chaque requête peut modifier différemment le DOM
 
+const serveur ="http://127.0.0.1:8000"
+const getAllActivities="/ie/activites/"
+
+
+/**Fin Gestion des endpoints pour requête AJAX*/
+
+/* ************************************************************************************************************************
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* ***************************************************************************************************************************/
 
 /**Début Gestion du Texte d'accueil affiché en haut de la page*/
 const texteAccueil=ref("S'Inscrire à une Activité")
@@ -280,14 +305,111 @@ let titleRowTable= [colomneReferentiel,colomneActivite,colomneDateLimiteInscript
 
 
 /*Récupération données par requête AJAX */
-//Pas encore implémenté ; sera fait à chaque onMounted
-/* Fin Récupération données par requête AJAX */
+const listeActivitesByPromo = reactive([])
 
-/*Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
+/*
+Mise des données reçues au format adapté pour le tableau
+*/
+const listeActivitesByPromoForTable=reactive([])
+
+const parsing = () => {
+  listeActivitesByPromo.forEach((activite)=>{
+    listeActivitesByPromoForTable.push(
+        {
+          id: activite.id,
+          un: {intitule: activite.engagement.intitule, cssclass: "non-clickable"},
+          deux: {intitule: activite.titre, cssclass: "clickable-text"},
+          trois: {intitule: activite.date_fin, cssclass: "non-clickable"},
+          quatre: {intitule: activite.max_participants, cssclass: "non-clickable"},
+          cinq: {intitule: "S'INSCRIRE", cssclass: "clickable-button"}
+        }
+    )
+  })
+
+  console.log(listeActivitesByPromoForTable)
+}
+/*
+Fin Mise des données reçues au format adapté pour le tableau
+*/
+
+/*Variable pour recopie données reçues par requête AJAX dans une array props pour CustomTable  */
 const dataRowTable = reactive([])
 
 
-dataRowTableSimul.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+/*
+
+
+
+    exemple de Donnée AJAX reçue
+{
+    "id": 1,
+    "titre": "Organisation de la conférence Ingénieurs Humanistes",
+    "description": ".... descr",
+    "note_min": 0.1,
+    "note_max": 0.15,
+    "visible": true,
+    "max_participants": 5,
+    "date_debut": "2023-03-13",
+    "date_fin": "2023-06-30",
+    "engagement": {
+      "intitule": "Ecole"
+    },
+    "referent": {
+      "last_name": "DEFOSSEZ",
+      "first_name": "Adrien"
+    }
+  },
+  FORMAT DE DESINATION
+  let data6 =
+    {
+      id : 6,                                                                    // pour gestion des emits
+      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
+      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
+      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
+      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
+      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
+
+
+
+    }*/
+
+function getActivitesByPromo (id_etudiant){
+  let fetchOptions = {
+    method :"GET"
+  }
+
+  const urlToRequest = serveur+getAllActivities
+
+  fetch(urlToRequest,fetchOptions).
+  then((result)=>{return result.json()}).
+  then((dataJson)=>{
+
+    listeActivitesByPromo.splice(0)
+    dataJson.forEach((activite)=>{listeActivitesByPromo.push(activite)})
+    parsing()
+    /*Debut Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
+    listeActivitesByPromoForTable.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+    /*Fin Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
+
+
+  }).catch((error)=>{console.log(error)})
+
+}
+/* Fin Récupération données par requête AJAX */
+
+
+
+
+
+
+
+
+
+/*Debut Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
+
+
+
+listeActivitesByPromoForTable.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
 
 
 
@@ -302,7 +424,12 @@ dataRowTableSimul.forEach(element=>dataRowTable.push(element)) //sera fait à ch
 /**FIN IMPLEMENTATION POUR REMPLISSAGE TABLEAU**************************************************/
 
 
+/**DEFINITION DU COMPORTEMENT ON MOUNTED*/
 
+onMounted(()=>{getActivitesByPromo(1);
+})
+
+/**FIN DEFINITION DU COMPORTEMENT ON MOUNTED*/
 
 
 
@@ -362,15 +489,15 @@ Le clic sur le boutton AFFICHER TOUT recharge toutes les activités disponibles
 const showNumberSearchResult= ref(false)
 function eventSearchBar(message){
   dataRowTable.splice(0)
-  dataRowTableSimul.forEach(                                                              //à effectuer sur donnees Ajax
-      (element) =>{element.deux.intitule.includes(message)?dataRowTable.push(element): ()=>{} })
+  listeActivitesByPromoForTable.forEach(
+      (element) =>{element.deux.intitule.toUpperCase().includes(message)?dataRowTable.push(element): ()=>{} })
   showNumberSearchResult.value=true
 
 }
 
 function backToAllData(event){
-
-  dataRowTableSimul.forEach(element=>dataRowTable.push(element))//à effectuer sur donnees Ajax
+  dataRowTable.splice(0)
+  listeActivitesByPromoForTable.forEach(element=>dataRowTable.push(element))//
   showNumberSearchResult.value=false
 
 }

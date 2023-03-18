@@ -2,7 +2,7 @@
 
   <div v-if="props.showed" id="reading-description">
     <div id="container-titre-activite-with-button-close">
-      <span id="titre-activite-in-readingDescription">TODO</span>
+      <span id="titre-activite-in-readingDescription">{{ titreAct.value }}</span>
 
 <!--  TODO : requête AJAX pour récupérer le nom et la description     -->
 
@@ -10,7 +10,9 @@
           src="src/assets/mes_activites/zone_texte_description/img_close.png" alt=""></button>
     </div>
     <div id="container-reading-description-with-referent-name-and-bonus">
-      <div id="description-activite-in-readingDescription"><p  id="description-in-reading-description"></p></div>
+      <div id="description-activite-in-readingDescription"> <p id="description-in-reading-description">100</p>
+
+      </div>
 
 
 
@@ -23,6 +25,7 @@
 </template>
 
 <script setup>
+import {onMounted, ref} from "vue";
 
 /**Définition des props*/
 //showed : boolean qui détermine si le composant est affiché ou non
@@ -32,6 +35,46 @@
 const props=defineProps(['showed', 'activity_id'])
 
 /**Fin Définition des props*/
+
+
+/**Gestion des endpoints pour requête AJAX*/
+//Note : les requêtes AJAX ne seront pas centralisées dans un seul fichier js.
+//Chaque requête peut modifier différemment le DOM
+
+const serveur ="http://127.0.0.1:8000"
+const getActivityTitleAndDescWithId="/ie/activites/"+props.activity_id
+
+
+/**Fin Gestion des endpoints pour requête AJAX*/
+
+/**Requete Ajax pour remplissage zone description*/
+
+const titreAct=ref('')
+const desc=ref('')
+
+function getTitreAndDesc (){
+  let fetchOptions = {
+    method :"GET"
+  }
+
+  const urlToRequest = serveur+getActivityTitleAndDescWithId
+
+  fetch(urlToRequest,fetchOptions).
+  then((result)=>{return result.json()}).
+  then((dataJson)=>{
+    console.log("dataJson)",dataJson)
+    desc.value= dataJson.description
+
+
+  }).catch((error)=>{console.log(error)})
+
+}
+
+onMounted(()=>{getTitreAndDesc()})
+
+
+
+/**Fin Requete Ajax pour remplissage zone description*/
 
 /**Définition des events*/
 
@@ -157,6 +200,14 @@ button#button-save-in-reading-description div span{
   margin-right: 5%;
 
 }
+
+p#description-in-reading-description{
+  background-color: #1f1f1f;
+
+  z-index: 20;
+}
+
+
 
 
 

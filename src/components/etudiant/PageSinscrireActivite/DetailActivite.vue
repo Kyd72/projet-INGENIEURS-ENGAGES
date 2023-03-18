@@ -2,11 +2,11 @@
 
   <div v-if="props.showed" id="detail-activite">
     <div id="container-titre-activite-with-button-close">
-      <span id="titre-activite-in-detailActivite">{{ props.activity_name }}</span>
+      <span id="titre-activite-in-detailActivite">{{ titreAct }}</span>
       <button id="button-close-in-detailActivite" @click="clickOnClose">X</button>
     </div>
     <div id="container-description-activite-with-referent-name-and-bonus">
-      <div id="description-activite-in-detailActivite"><p></p></div>
+      <div id="description-activite-in-detailActivite"><p>{{desc}}</p></div>
       <div id="container-nom-referent-with-bonus">
         <span id="nom-referent-in-detailActivite">NOM DU REFERENT : </span>
         <span id="bonus-in-detailActivite"> INTERVALLE POINTS :</span>
@@ -20,6 +20,8 @@
 
 <script setup>
 
+import { onUpdated, ref} from "vue";
+
 /**Définition des props*/
 //showed : boolean qui détermine si le composant est affiché ou non
 //activity_name : nom de l'activité
@@ -28,6 +30,55 @@
 const props=defineProps(['showed', 'activity_name', 'activity_id'])
 
 /**Fin Définition des props*/
+
+/**Gestion des endpoints pour requête AJAX*/
+//Note : les requêtes AJAX ne seront pas centralisées dans un seul fichier js.
+//Chaque requête peut modifier différemment le DOM
+
+const serveur ="http://127.0.0.1:8000"
+const getActivityTitleAndDescWithId="/ie/activites/"
+
+
+/**Fin Gestion des endpoints pour requête AJAX*/
+
+/**Requete Ajax pour remplissage zone description*/
+
+let titreAct=ref("")
+let desc =ref("")
+
+ function getTitreAndDesc (){
+
+  let fetchOptions = {
+    method :"GET"
+  }
+
+
+  const urlToRequest = serveur+getActivityTitleAndDescWithId+props.activity_id
+
+   const req = () => {
+     fetch(urlToRequest,fetchOptions).
+     then((result)=>{return result.json()}).
+     then((dataJson)=>{
+
+       desc.value= dataJson.description
+       titreAct.value=dataJson.titre
+
+
+     }).catch((error)=>{console.log(error)})
+   }
+
+   props.activity_id!==""?req():()=>{}
+
+
+
+}
+
+//Le composant étant déjà monté au lancement de la SPA, mais masqué, la requête AJAx est faite à chaque update
+onUpdated(getTitreAndDesc)
+
+
+
+/**Fin Requete Ajax pour remplissage zone description*/
 
 /**Définition des events*/
 
@@ -40,6 +91,9 @@ const emits=defineEmits(['clickOnClosed'])
 /**Gestion click bouton croix*/
 const clickOnClose = (event) => {
   emits('clickOnClosed', "Set showed to false")
+  desc.value=''
+  titreAct.value=''
+
 }
 /**Fin Gestion click bouton croix*/
 
@@ -141,6 +195,12 @@ span#nom-referent-in-detailActivite{
 span#bonus-in-detailActivite{
   width: 35%;
   overflow: hidden;
+}
+
+p {
+  overflow: auto;
+  font-size: 4vh;
+  font-family: 'Poppins', Poppins , sans-serif;
 }
 
 
