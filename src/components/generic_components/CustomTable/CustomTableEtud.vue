@@ -234,7 +234,6 @@ function onClickOnRowData7 (message) {
   width: 100%;
 }
 .row ul li{
-  font-weight: 500;
   font-family: 'Poppins', Poppins , sans-serif;
   list-style: none;
   display: flex;
@@ -265,12 +264,12 @@ function onClickOnRowData7 (message) {
 
 
 .row-fadeIn-wrapper ul li span {
+  font-weight: 600 ;
 
   height: 3vh;
   width: 100%;
   overflow: hidden;
   padding: 0;
-  font-weight: 500;
   font-family: 'Poppins', Poppins , sans-serif;
   font-size: v-bind(fontSizeRow);
   line-height: v-bind(fontSizeRow);
@@ -392,7 +391,7 @@ function onClickOnRowData7 (message) {
   height: 100%;
   display: inline-flex;
   overflow: hidden;
-  margin: auto 3%;
+  margin: auto 4%;
 
 
 }

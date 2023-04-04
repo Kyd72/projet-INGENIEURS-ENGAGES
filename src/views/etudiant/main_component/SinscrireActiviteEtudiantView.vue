@@ -43,7 +43,7 @@
 
 <script setup>
 
-import {onMounted, reactive, ref} from "vue";
+import {onBeforeMount, onMounted, reactive, ref} from "vue";
 import SearchBar from "@/components/generic_components/SearchBar/SearchBar.vue";
 import CustomTableEtud from "@/components/generic_components/CustomTable/CustomTableEtud.vue";
 import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailActivite.vue";
@@ -53,7 +53,7 @@ import DetailActivite from "@/components/etudiant/PageSinscrireActivite/DetailAc
 //Chaque requête peut modifier différemment le DOM
 
 const serveur ="http://127.0.0.1:8000"
-const getAllActivities="/ie/activites/"
+const getAllActivities="/ie/activites/etudiant"
 
 
 /**Fin Gestion des endpoints pour requête AJAX*/
@@ -86,190 +86,15 @@ const texteAccueil=ref("S'Inscrire à une Activité")
 Cette section permet de comprendre le format des données à
 respecter pour le tableau
 */
+import {dataRowTableSimul} from "@/test_data"
 
-
-
-let data1 =
-    {
-      id : 1,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER CONFERENCE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}
-    }
-let data2 =
-    {
-      id : 2,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data3 =
-    {
-      id : 3,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data4 =
-    {
-      id : 4,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data5 =
-    {
-      id : 5,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data6 =
-    {
-      id : 6,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data7 =
-    {
-      id : 7,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data8 =
-    {
-      id : 8,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data9 =
-    {
-      id : 9,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data10 =
-    {
-      id : 10,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data11 =
-    {
-      id : 11,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data12 ={
-      id : 12,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data13 ={
-      id : 13,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-
-let data14 ={
-      id : 14,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "non-clickable"},                     //pour colomne
-      cinq :   {intitule : "S'INSCRIRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-const dataRowTableSimul=  [data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13,data14]
 
 
 /**FIN Simulation données pour tableau*/
 
 /**DEBUT IMPLEMENTATION POUR REMPLISSAGE TABLEAU ********************************************************************************/
-//Données à afficher dans le tableau
+
+//Définition de l'en-tête du tableau
 let colomneReferentiel=
     { imgsrc : "src/assets/SinscrireActivite/TableauActivteOuverte/img_referentiel.png",
       cssclass :"non-clickable",
@@ -302,45 +127,46 @@ let colomneSinscrire=
 
 
 let titleRowTable= [colomneReferentiel,colomneActivite,colomneDateLimiteInscription,colomnePlacesRestantes, colomneSinscrire]
+//Fin Définition de l'en-tête du tableau
 
-
-/*Récupération données par requête AJAX */
+/* Variable pour récupération des données par requête AJAX */
 const listeActivitesByPromo = reactive([])
+/* Fin Variable pour récupération des données par requête AJAX */
 
-/*
-Mise des données reçues au format adapté pour le tableau
-*/
+
+/* Variable pour contenir les données reçues  mises dans un format adapté pour le tableau*/
 const listeActivitesByPromoForTable=reactive([])
+/* Fin Variable pour contenir les données mises dans un format adapté pour le tableau*/
 
-const parsing = () => {
-  listeActivitesByPromo.forEach((activite)=>{
-    listeActivitesByPromoForTable.push(
-        {
-          id: activite.id,
-          un: {intitule: activite.engagement.intitule, cssclass: "non-clickable"},
-          deux: {intitule: activite.titre, cssclass: "clickable-text"},
-          trois: {intitule: activite.date_fin, cssclass: "non-clickable"},
-          quatre: {intitule: activite.max_participants, cssclass: "non-clickable"},
-          cinq: {intitule: "S'INSCRIRE", cssclass: "clickable-button"}
-        }
-    )
-  })
+/*Fonction pour mettre les données reçues dans un format adapté pour le tableau*/
+const parsing = (tableauInitial, tablauFinal) => {
 
-  console.log(listeActivitesByPromoForTable)
-}
-/*
-Fin Mise des données reçues au format adapté pour le tableau
-*/
-
-/*Variable pour recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-const dataRowTable = reactive([])
-
-
-/*
-
+  /*
 
 
     exemple de Donnée AJAX reçue
+
+    [
+  {
+    "id": 0,
+    "titre": "string",
+    "description": "string",
+    "note_min": 0,
+    "note_max": 0,
+    "visible": true,
+    "max_participants": 5,
+    "date_debut": "2023-03-20",
+    "date_fin": "2023-03-20",
+    "engagement": {
+      "intitule": "string"
+    },
+    "referent": 0
+  }
+]
+
+
+
+
 {
     "id": 1,
     "titre": "Organisation de la conférence Ingénieurs Humanistes",
@@ -373,61 +199,75 @@ const dataRowTable = reactive([])
 
     }*/
 
-function getActivitesByPromo (id_etudiant){
+  tableauInitial.forEach((activite)=>{
+    tablauFinal.push(
+        {
+          id: activite.id,
+          un: {intitule: activite.engagement.intitule, cssclass: "non-clickable"},
+          deux: {intitule: activite.titre, cssclass: "clickable-text"},
+          trois: {intitule: activite.date_fin, cssclass: "non-clickable"},
+          quatre: {intitule: activite.max_participants, cssclass: "non-clickable"},
+          cinq: {intitule: "S'INSCRIRE", cssclass: "clickable-button"}
+        }
+    )
+  })
+
+  console.log(tablauFinal)
+}
+/* Fin Fonction pour mettre les données reçues dans un format adapté pour le tableau*/
+
+/* Variable pour recopier les données au format tableau  */
+// Recopie nécessaire pour effectuer les recherches, car les recherches sont locales
+const dataRowTable = reactive([])
+/* Fin Variable pour recopier les données au format tableau  */
+
+/* Fonction pour récupérer les données par requête AJAX, les mettre au bon format et les recopier dans le tableau */
+function getActivitesByPromo (idPromo, tableauInitial, tableauFinal, tableauFinalBis){
+
+
   let fetchOptions = {
-    method :"GET"
+    method :"GET",
+    credentials: 'include',
+    withCredentials:true
   }
 
-  const urlToRequest = serveur+getAllActivities
+
+  const urlToRequest = "http://127.0.0.1:8000/ie/activites/etudiant"
 
   fetch(urlToRequest,fetchOptions).
   then((result)=>{return result.json()}).
   then((dataJson)=>{
+    console.log(dataJson)
 
-    listeActivitesByPromo.splice(0)
-    dataJson.forEach((activite)=>{listeActivitesByPromo.push(activite)})
-    parsing()
+    tableauInitial.splice(0)
+    dataJson.forEach((activite)=>{tableauInitial.push(activite)})
+    parsing(tableauInitial,tableauFinal)
     /*Debut Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-    listeActivitesByPromoForTable.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+    tableauFinal.forEach(element=>tableauFinalBis.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
     /*Fin Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
 
 
-  }).catch((error)=>{console.log(error)})
+  }).catch((error)=>{
+    console.log(error)
+  }
+  )
 
 }
-/* Fin Récupération données par requête AJAX */
+/* Fin Fonction pour récupérer les données par requête AJAX, les mettre au bon format et les recopier dans le tableau*/
 
 
-
-
-
-
-
-
-
-/*Debut Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-
-
-
-listeActivitesByPromoForTable.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
-
-
-
-/*Fin Recopie données reçues par requête AJAX dans une array props pour CustomTable  */
-
-
-
-
-
-
-//
 /**FIN IMPLEMENTATION POUR REMPLISSAGE TABLEAU**************************************************/
 
 
 /**DEFINITION DU COMPORTEMENT ON MOUNTED*/
 
-onMounted(()=>{getActivitesByPromo(1);
+onMounted(()=>{
+  dataRowTableSimul.forEach(element=>dataRowTable.push(element)) //sera fait à chaque onMounted ou à chaque clic sur AFFICHER TOUT
+  //getActivitesByPromo(1, listeActivitesByPromo, listeActivitesByPromoForTable, dataRowTable);
 })
+
+
+
 
 /**FIN DEFINITION DU COMPORTEMENT ON MOUNTED*/
 
@@ -578,7 +418,8 @@ div#texte_accueil{
   font-family: 'Poppins',Poppins ,sans-serif;
   font-size: 3vh;
   width: 24vw;
-  margin: 4% auto;
+  margin-top: 5%;
+  margin-left: 26vw;
   font-weight: 750;
 
 }

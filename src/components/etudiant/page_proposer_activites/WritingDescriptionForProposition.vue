@@ -5,13 +5,16 @@
       <span id="titre-activite-in-writingDescription">{{ props.activity_name }}</span>
       <button title="Supprimer cette activité" id="button-delete-in-writingDescription" class="button-in-WritingDescription" @click="clickOnDelete">
         <img
-          src="src/assets/mes_activites/zone_texte_description/img_delete.png" alt=""></button>
+            src="src/assets/mes_activites/zone_texte_description/img_delete.png" alt=""></button>
       <button title="Fermer" id="button-close-in-writingDescription" class="button-in-WritingDescription" @click="clickOnClose"><img
           src="src/assets/mes_activites/zone_texte_description/img_close.png" alt=""></button>
     </div>
     <div id="container-writing-description-with-referent-name-and-bonus">
-      <div id="description-activite-in-writingDescription"><textarea name="written_description" id="description-in-writing-description"
-           placeholder="Décrivez les actions menées dans le cadre de cette activité"></textarea></div>
+      <div id="description-activite-in-writingDescription">
+        <input placeholder="Nom de l'activité"  />
+        <textarea name="written_description" id="description-in-writing-description"
+        placeholder="Décrivez les actions menées dans le cadre de cette activité"/>
+      </div>
 
       <button id="button-save-in-writing-description" class="button-in-WritingDescription" @click="clickOnSave" title="Sauvegarder">
         <div>
@@ -107,7 +110,7 @@ span#titre-activite-in-writingDescription{
 }
 
 button.button-in-WritingDescription{
-  
+
 
   border-radius: 1vh;
   background-color: #283593;
@@ -131,7 +134,7 @@ button.button-in-WritingDescription:active{
 
 button#button-delete-in-writingDescription{
 
-background-color: #ff4141;
+  background-color: #ff4141;
 }
 
 button#button-delete-in-writingDescription:active{
@@ -152,12 +155,20 @@ div#container-writing-description-with-referent-name-and-bonus{
 }
 
 div#description-activite-in-writingDescription{
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   height: 90%;
   width: 96%;
   margin: 2%;
-  border: #1f1f1f dotted 1px;
   overflow: auto;
+
+
+}
+
+div#description-activite-in-writingDescription input
+{
+  width: 60%;
+  height: 12%;
 
 
 }
@@ -172,6 +183,9 @@ textarea{
   height: 100%;
   width: 100%;
   font-size: 1.9vh;
+  margin-top: 1%;
+  border: #1f1f1f dotted 1px;
+
 
 }
 
@@ -184,7 +198,7 @@ button#button-save-in-writing-description div{
 }
 
 button#button-save-in-writing-description div span{
-margin-right: 5%;
+  margin-right: 5%;
 
 }
 

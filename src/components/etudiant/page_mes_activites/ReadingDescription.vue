@@ -10,7 +10,7 @@
           src="src/assets/mes_activites/zone_texte_description/img_close.png" alt=""></button>
     </div>
     <div id="container-reading-description-with-referent-name-and-bonus">
-      <div id="description-activite-in-readingDescription"> <p id="description-in-reading-description">100</p>
+      <div id="description-activite-in-readingDescription"> <p id="description-in-reading-description"> {{t}}</p>
 
       </div>
 
@@ -33,6 +33,17 @@ import {onMounted, ref} from "vue";
 //activity_id : id de l'activité pour requêtes AJAX
 
 const props=defineProps(['showed', 'activity_id'])
+
+
+const t=ref("Victus universis caro ferina est lactisque abundans copia qua sustentantur, et herbae multiplices et siquae alites capi per aucupium possint, et plerosque mos vidimus frumenti usum et vini penitus ignorantes.\n" +
+    "\n" +
+    "Post hanc adclinis Libano monti Phoenice, regio plena gratiarum et venustatis, urbibus decorata magnis et pulchris; in quibus amoenitate celebritateque nominum Tyros excellit, Sidon et Berytus isdemque pares Emissa et Damascus saeculis condita priscis.\n" +
+    "\n" +
+    "Raptim igitur properantes ut motus sui rumores celeritate nimia praevenirent, vigore corporum ac levitate confisi per flexuosas semitas ad summitates collium tardius evadebant. et cum superatis difficultatibus arduis ad supercilia venissent fluvii Melanis alti et verticosi, qui pro muro tuetur accolas circumfusus, augente nocte adulta terrorem quievere paulisper lucem opperientes. arbitrabantur enim nullo inpediente transgressi inopino adcursu adposita quaeque vastare, sed in cassum labores pertulere gravissimos.\n" +
+    "\n" +
+    "Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.\n" +
+    "\n" +
+    "Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox abiecerunt in flumen.")
 
 /**Fin Définition des props*/
 
@@ -181,12 +192,6 @@ div#description-activite-in-readingDescription {
 
 }
 
-textarea{
-  height: 100%;
-  width: 100%;
-  font-size: 1.9vh;
-
-}
 
 button#button-save-in-reading-description div{
   display: inline-flex;
@@ -202,7 +207,8 @@ button#button-save-in-reading-description div span{
 }
 
 p#description-in-reading-description{
-  background-color: #1f1f1f;
+  background-color: #ffffff;
+  overflow: auto;
 
   z-index: 20;
 }

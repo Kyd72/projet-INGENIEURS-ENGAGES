@@ -5,10 +5,17 @@ import MesActivitesView from "@/views/etudiant/main_component/MesActivitesView.v
 import MesPointsView from "@/views/etudiant/main_component/MesPointsView.vue";
 import ProposerActiviteView from "@/views/etudiant/main_component/ProposerActiviteView.vue";
 import SinscrireActiviteEtudiantView from "@/views/etudiant/main_component/SinscrireActiviteEtudiantView.vue";
+import LoginToIEView from "@/views/login/main/LoginToIEView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/LoginEtudiant',
+      name: 'LoginEtudiant',
+      components: {sidebar_etudiant_router:SidebarView,
+        main_component_etudiant_router:LoginToIEView}
+    },
     {
       path: '/AccueilEtudiant',
       name: 'AccueilEtudiant',

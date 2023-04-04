@@ -1,5 +1,16 @@
 <template>
+
+
   <div id="mes_activites">
+    <div class="header_infos" id="semestre">
+      <img class="header_infos_img" id="img_semestre" src="src/assets/mes_activites/header/semestre/img_semestre.png" alt="image">
+      <span>SEMESTRE</span>
+    </div>
+    <div class="header_infos" id="nbre_points">
+      <span>Points gagnés : </span>
+    </div>
+
+
     <div id="texte_accueil">{{texteAccueil.toUpperCase()}} </div>
   </div>
 
@@ -102,140 +113,15 @@ import ReadingDescription from "@/components/etudiant/page_mes_activites/Reading
 
 
 /**Début Gestion du Texte d'accueil affiché en haut de la page*/
-const texteAccueil=ref("S'Inscrire à une Activité")
+const texteAccueil=ref("Mes activités")
 
 /**Fin Gestion Texte d'accueil affiché en haut de la page*/
 
 //*****************************************************************
 /**DEBUT Simulation données pour tableau --*/
-/*
-Cette section permet de comprendre le format des données à
-respecter pour le tableau
-*/
 
+import {dataRowTableSimul1, dataRowTableSimul2} from "@/test_data"
 
-
-let data1 =
-    {
-      id : 1,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ORGANISER CONFERENCE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}
-    }
-let data2 =
-    {
-      id : 2,                                                                    // pour gestion des emits
-      un :     {intitule : "CLIMAT", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "PLANTER DES ARBRES", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}               //pour colomne
-
-
-
-    }
-let data3 =
-    {
-      id : 3,                                                                    // pour gestion des emits
-      un :     {intitule : "ASSOCIATIF", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "TRAVAILLER A HORUS", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMIS", cssclass : "not-clickable-button"}                //pour colomne
-
-
-
-    }
-let data4 =
-    {
-      id : 4,                                                                    // pour gestion des emits
-      un :     {intitule : "DIVERSITE", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "PARTICIPER AUX CORDEES DE LA REUSSITE", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}                //pour colomne
-
-
-
-    }
-let data5 =
-    {
-      id : 5,                                                                    // pour gestion des emits
-      un :     {intitule : "HUMANITAIRE", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ACCUEILLIR DIRECTEUR RWANDA", cssclass : "clickable-text"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "10-07-2021", cssclass : "non-clickable"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "SOUMETTRE", cssclass : "clickable-button"}               //pour colomne
-
-
-
-    }
-let data6 =
-    {
-      id : 6,                                                                    // pour gestion des emits
-      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "DIVERSITE", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                //pour colomne
-
-
-
-    }
-let data7 =
-    {
-      id : 7,                                                                    // pour gestion des emits
-      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ASSOCIATIF", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "ORGANISER STAGE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
-
-
-
-    }
-let data8 =
-    {
-      id : 8,                                                                    // pour gestion des emits
-      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "ASSOCIATIF", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "PARTICIPER CONFERENCE", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                //pour colomne
-
-
-
-    }
-let data9 =
-    {
-      id : 9,                                                                    // pour gestion des emits
-      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "CLIMAT", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "FRESQUES DU CLIMAT", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
-
-
-
-    }
-let data10 =
-    {
-      id : 10,                                                                    // pour gestion des emits
-      un :     {intitule : "5", cssclass : "non-clickable"},                //pour colomne REFERENTIEL
-      deux :   {intitule : "DIVERSITE", cssclass : "non-clickable"},    //pour colomne NOM DE L'ACTIVITE
-      trois :  {intitule : "CORDEES", cssclass : "clickable-text"},             //pour colomne DATE LIMITE
-      quatre : {intitule : "7", cssclass : "editable-text"},                     //pour colomne
-      cinq :   {intitule : "0.25", cssclass : "non-clickable"}                 //pour colomne
-
-
-
-    }
-
-
-const dataRowTableSimul1=  [data1,data2,data3,data4,data5]
-const dataRowTableSimul2=  [data6,data7,data8,data9,data10]
 
 /**FIN Simulation données pour tableau*/
 
@@ -340,18 +226,9 @@ dataRowTableSimul2.forEach(element=>dataRowTableActiviteesTerminees.push(element
 
 /**FIN IMPLEMENTATION POUR REMPLISSAGE TABLEAU**************************************************/
 
-
-
-
-
-
-
-
-
 /****DEBUT implémentation affichage dynamique tableau*/
 /*Les clics sur le titre du tableau doivent pouvoir afficher et masquer ce dernier et doit également changer
 la direction de la flèche
-
 
 */
 
@@ -577,9 +454,62 @@ div#texte_accueil{
   font-family: 'Poppins',Poppins ,sans-serif;
   font-size: 3vh;
   width: 24vw;
-  margin: 4% auto;
+  margin-top: 10%;
+  margin-left: 30vw;
   font-weight: 750;
 
+}
+
+div.header_infos{
+  display: inline-flex;
+  align-items: center; /*alignement vertical*/
+  justify-content: center;/*alignement horizontal*/
+  background-color: #283593;
+  border-radius: 1.7vh;
+  color: #FFFFFF;
+}
+
+div#semestre{
+
+  position: absolute;
+  left: 3%;
+  top: 3%;
+
+}
+
+div#nbre_points span{
+  width:13vw;
+  margin-left: 5%;
+
+
+
+}
+
+div#nbre_points {
+position: absolute;
+right: 3%;
+top: 3%;
+
+}
+
+
+div.header_infos span {
+  display: inline-flex;
+  align-items: center; /*alignement vertical*/
+  height: 6vh;
+  width:10vw;
+  overflow: hidden;
+  padding: 0;
+  font-weight: 1000;
+  font-family: 'Poppins', Poppins , sans-serif;
+  font-size: 2vh;
+  line-height: 2vh;
+}
+
+img.header_infos_img{
+  height: 4vh;
+  width: 4vh;
+  margin-left: 7%;
 }
 
 

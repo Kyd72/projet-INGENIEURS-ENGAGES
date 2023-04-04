@@ -1,7 +1,8 @@
 <template>
   <li>
 
-    <span v-if="props.css_class!=='editable-text' " :class="props.css_class">{{props.data}}</span>
+    <span v-if="props.css_class!=='editable-text' " :class="props.css_class"
+    >{{props.data}}</span>
 
     <input v-if="props.css_class==='editable-text' " type="text" name="description" placeholder="Voir description" :class="props.css_class">
 
@@ -19,8 +20,17 @@ Les valeurs possibles sont "clickable-button" ,"clickable-text", "editable_text"
 /*data pour données à afficher;
 * class pour définir le rendu */
 const props= defineProps(["data", "css_class", "id"])
+let color=""
+
+props.data==="REFUSE"?color="#ff4141":props.data==="ACCEPTE"?color="#00F577FF":color="#000000"
+
 </script>
 
 <style scoped>
 
+span{
+  color: v-bind(color);
+}
+
 </style>
+
